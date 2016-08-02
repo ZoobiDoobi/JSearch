@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JSearch.Models.Judge>
+
+@{
+    ViewBag.Title = "Judges List";
+}
+
+<h2>Judges List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateJudge","",new {@class = "btn btn-success btn-lg" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JudgeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JudgeRemarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JudgeStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.JudgeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JudgeRemarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JudgeStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { judgeId=item.JudgeId }) |
+            @Html.ActionLink("Details", "Details", new { judgeId=item.JudgeId }) |
+            @Html.ActionLink("Delete", "Delete", new { judgeId=item.JudgeId })
+        </td>
+    </tr>
+}
+
+</table>

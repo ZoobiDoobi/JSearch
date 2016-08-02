@@ -1,0 +1,41 @@
+﻿@model JSearch.ViewModels.JudgeViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div>
+    <h4>Are you sure you want to delete it?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JudgeName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JudgeName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JudgeRemarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JudgeRemarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JudgeStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JudgeStatus)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,17 @@
+﻿@model JSearch.ViewModels.LawsViewModel
+@{
+    ViewBag.Title = "Laws";
+}
+
+<h2>Laws</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.Laws, new SelectList(Model.Laws, "LawId", "LawTitle"), "Select Law Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Laws)
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+}

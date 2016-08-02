@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JSearchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courts">
+          <Key>
+            <PropertyRef Name="CourtId" />
+          </Key>
+          <Property Name="CourtId" Type="int" Nullable="false" />
+          <Property Name="CourtCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CourtName" Type="nvarchar(max)" />
+          <Property Name="CourtRemarks" Type="nvarchar(max)" />
+          <Property Name="CourtStatus" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CourtDateTimeStamp" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FileSections">
+          <Key>
+            <PropertyRef Name="FileSectionId" />
+          </Key>
+          <Property Name="FileSectionId" Type="int" Nullable="false" />
+          <Property Name="FileSectionCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="SectionId" Type="int" />
+          <Property Name="FileId" Type="int" />
+          <Property Name="UserId" Type="nchar" MaxLength="10" />
+          <Property Name="TerminalName" Type="nchar" MaxLength="10" />
+          <Property Name="FileSectionStatus" Type="int" />
+          <Property Name="FSDateTimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Judges">
+          <Key>
+            <PropertyRef Name="JudgeId" />
+          </Key>
+          <Property Name="JudgeId" Type="int" Nullable="false" />
+          <Property Name="JudgeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="JudgeName" Type="nvarchar(max)" />
+          <Property Name="JudgeRemarks" Type="nvarchar(max)" />
+          <Property Name="JudgeStatus" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="JudgeDateTimeStamp" Type="datetime" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LawFiles">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="FileCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="FileDescription" Type="nvarchar(max)" />
+          <Property Name="FilePath" Type="nvarchar(max)" />
+          <Property Name="FileAbstract" Type="nvarchar(max)" />
+          <Property Name="JudgeId" Type="int" />
+          <Property Name="FileRemarks" Type="nvarchar(max)" />
+          <Property Name="CourtId" Type="int" />
+          <Property Name="FileYear" Type="nvarchar" MaxLength="10" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="FileDateTimeStamp" Type="datetime" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Laws">
+          <Key>
+            <PropertyRef Name="LawId" />
+          </Key>
+          <Property Name="LawId" Type="int" Nullable="false" />
+          <Property Name="LawCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="LawTitle" Type="nvarchar(max)" />
+          <Property Name="LawRemarks" Type="nvarchar(max)" />
+          <Property Name="LawStatus" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LawDateTimeStamp" Type="datetime" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="SectionCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="SectionName" Type="nvarchar(max)" />
+          <Property Name="LawId" Type="int" />
+          <Property Name="SectionRefId" Type="int" />
+          <Property Name="SectionStatus" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="SectionRemarks" Type="nchar" MaxLength="10" />
+          <Property Name="SectionDateTimeStamp" Type="datetime" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="JSearchDBModelStoreContainer">
+          <EntitySet Name="Courts" EntityType="Self.Courts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileSections" EntityType="Self.FileSections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Judges" EntityType="Self.Judges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LawFiles" EntityType="Self.LawFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laws" EntityType="Self.Laws" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JSearchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Court">
+          <Key>
+            <PropertyRef Name="CourtId" />
+          </Key>
+          <Property Name="CourtId" Type="Int32" Nullable="false" />
+          <Property Name="CourtCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CourtName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourtRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourtStatus" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CourtDateTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FileSection">
+          <Key>
+            <PropertyRef Name="FileSectionId" />
+          </Key>
+          <Property Name="FileSectionId" Type="Int32" Nullable="false" />
+          <Property Name="FileSectionCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SectionId" Type="Int32" />
+          <Property Name="FileId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TerminalName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FileSectionStatus" Type="Int32" />
+          <Property Name="FSDateTimeStamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Judge">
+          <Key>
+            <PropertyRef Name="JudgeId" />
+          </Key>
+          <Property Name="JudgeId" Type="Int32" Nullable="false" />
+          <Property Name="JudgeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JudgeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JudgeRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JudgeStatus" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JudgeDateTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LawFile">
+          <Key>
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="FileCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FileDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileAbstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JudgeId" Type="Int32" />
+          <Property Name="FileRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourtId" Type="Int32" />
+          <Property Name="FileYear" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FileDateTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Law">
+          <Key>
+            <PropertyRef Name="LawId" />
+          </Key>
+          <Property Name="LawId" Type="Int32" Nullable="false" />
+          <Property Name="LawCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LawTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LawRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LawStatus" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LawDateTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="Int32" Nullable="false" />
+          <Property Name="SectionCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SectionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LawId" Type="Int32" />
+          <Property Name="SectionRefId" Type="Int32" />
+          <Property Name="SectionStatus" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SectionRemarks" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SectionDateTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="JSearchEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courts" EntityType="Self.Court" />
+          <EntitySet Name="FileSections" EntityType="Self.FileSection" />
+          <EntitySet Name="Judges" EntityType="Self.Judge" />
+          <EntitySet Name="LawFiles" EntityType="Self.LawFile" />
+          <EntitySet Name="Laws" EntityType="Self.Law" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JSearchDBModelStoreContainer" CdmEntityContainer="JSearchEntities">
+          <EntitySetMapping Name="Courts">
+            <EntityTypeMapping TypeName="JSearchDBModel.Court">
+              <MappingFragment StoreEntitySet="Courts">
+                <ScalarProperty Name="CourtId" ColumnName="CourtId" />
+                <ScalarProperty Name="CourtCode" ColumnName="CourtCode" />
+                <ScalarProperty Name="CourtName" ColumnName="CourtName" />
+                <ScalarProperty Name="CourtRemarks" ColumnName="CourtRemarks" />
+                <ScalarProperty Name="CourtStatus" ColumnName="CourtStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourtDateTimeStamp" ColumnName="CourtDateTimeStamp" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileSections">
+            <EntityTypeMapping TypeName="JSearchDBModel.FileSection">
+              <MappingFragment StoreEntitySet="FileSections">
+                <ScalarProperty Name="FileSectionId" ColumnName="FileSectionId" />
+                <ScalarProperty Name="FileSectionCode" ColumnName="FileSectionCode" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+                <ScalarProperty Name="FileSectionStatus" ColumnName="FileSectionStatus" />
+                <ScalarProperty Name="FSDateTimeStamp" ColumnName="FSDateTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Judges">
+            <EntityTypeMapping TypeName="JSearchDBModel.Judge">
+              <MappingFragment StoreEntitySet="Judges">
+                <ScalarProperty Name="JudgeId" ColumnName="JudgeId" />
+                <ScalarProperty Name="JudgeCode" ColumnName="JudgeCode" />
+                <ScalarProperty Name="JudgeName" ColumnName="JudgeName" />
+                <ScalarProperty Name="JudgeRemarks" ColumnName="JudgeRemarks" />
+                <ScalarProperty Name="JudgeStatus" ColumnName="JudgeStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="JudgeDateTimeStamp" ColumnName="JudgeDateTimeStamp" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LawFiles">
+            <EntityTypeMapping TypeName="JSearchDBModel.LawFile">
+              <MappingFragment StoreEntitySet="LawFiles">
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FileCode" ColumnName="FileCode" />
+                <ScalarProperty Name="FileTitle" ColumnName="FileTitle" />
+                <ScalarProperty Name="FileDescription" ColumnName="FileDescription" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileAbstract" ColumnName="FileAbstract" />
+                <ScalarProperty Name="JudgeId" ColumnName="JudgeId" />
+                <ScalarProperty Name="FileRemarks" ColumnName="FileRemarks" />
+                <ScalarProperty Name="CourtId" ColumnName="CourtId" />
+                <ScalarProperty Name="FileYear" ColumnName="FileYear" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FileDateTimeStamp" ColumnName="FileDateTimeStamp" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laws">
+            <EntityTypeMapping TypeName="JSearchDBModel.Law">
+              <MappingFragment StoreEntitySet="Laws">
+                <ScalarProperty Name="LawId" ColumnName="LawId" />
+                <ScalarProperty Name="LawCode" ColumnName="LawCode" />
+                <ScalarProperty Name="LawTitle" ColumnName="LawTitle" />
+                <ScalarProperty Name="LawRemarks" ColumnName="LawRemarks" />
+                <ScalarProperty Name="LawStatus" ColumnName="LawStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LawDateTimeStamp" ColumnName="LawDateTimeStamp" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="JSearchDBModel.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="SectionCode" ColumnName="SectionCode" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="LawId" ColumnName="LawId" />
+                <ScalarProperty Name="SectionRefId" ColumnName="SectionRefId" />
+                <ScalarProperty Name="SectionStatus" ColumnName="SectionStatus" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SectionRemarks" ColumnName="SectionRemarks" />
+                <ScalarProperty Name="SectionDateTimeStamp" ColumnName="SectionDateTimeStamp" />
+                <ScalarProperty Name="TerminalName" ColumnName="TerminalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
