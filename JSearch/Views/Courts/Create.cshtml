@@ -1,0 +1,27 @@
+﻿@model JSearch.ViewModels.CourtsViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add New Court</h2>
+@using (Html.BeginForm("Create","Courts"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(c => c.CourtName)
+        @Html.TextBoxFor(c => c.CourtName, new { @class="form-control",autofocus= "autofcous" })
+        @Html.ValidationMessageFor(c => c.CourtName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.CourtRemarks)
+        @Html.TextBoxFor(c => c.CourtRemarks, new { @class="form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.CourtStatus)
+        @Html.TextBoxFor(c => c.CourtStatus,new { @class="form-control" })
+        @Html.ValidationMessageFor(c => c.CourtStatus)
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+}
+<br />
+@Html.ActionLink("Back To List","Index")

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<JSearch.Models.Court>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="courts">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourtName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourtRemarks)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourtName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourtRemarks)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CourtId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CourtId})
+        </td>
+    </tr>
+}
+</table>

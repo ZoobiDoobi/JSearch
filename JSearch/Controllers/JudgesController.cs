@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace JSearch.Controllers
 {
     [Authorize]
-    public class JudgeController : Controller
+    public class JudgesController : Controller
     {
         JSearchContext context = new JSearchContext();
         // GET: Judge

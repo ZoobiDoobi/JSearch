@@ -210,7 +210,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourtsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JudgeController.cs" />
+    <Compile Include="Controllers\JudgesController.cs" />
     <Compile Include="Controllers\LawsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
@@ -255,6 +255,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CourtsViewModel.cs" />
     <Compile Include="ViewModels\JudgeViewModel.cs" />
     <Compile Include="ViewModels\LawsViewModel.cs" />
   </ItemGroup>
@@ -277,6 +278,8 @@
     </Content>
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -335,16 +338,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Judge\CreateJudge.cshtml" />
+    <Content Include="Views\Judges\CreateJudge.cshtml" />
     <Content Include="Views\Laws\GetLaws.cshtml" />
-    <Content Include="Views\Judge\Index.cshtml" />
-    <Content Include="Views\Judge\Edit.cshtml" />
-    <Content Include="Views\Judge\Details.cshtml" />
-    <Content Include="Views\Judge\Delete.cshtml" />
+    <Content Include="Views\Judges\Index.cshtml" />
+    <Content Include="Views\Judges\Edit.cshtml" />
+    <Content Include="Views\Judges\Details.cshtml" />
+    <Content Include="Views\Judges\Delete.cshtml" />
+    <Content Include="Views\Courts\Create.cshtml" />
+    <Content Include="Views\Courts\Index.cshtml" />
+    <Content Include="Views\Courts\Edit.cshtml" />
+    <Content Include="Views\Courts\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Courts\" />
     <Folder Include="Views\Sections\" />
   </ItemGroup>
   <ItemGroup>
