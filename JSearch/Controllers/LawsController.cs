@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace JSearch.Controllers
 {
+    [Authorize]
     public class LawsController : Controller
     {
         JSearchContext context = new JSearchContext();
