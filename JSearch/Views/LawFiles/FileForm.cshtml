@@ -1,0 +1,52 @@
+﻿@model JSearch.ViewModels.LawFilesViewModel
+@{
+    ViewBag.Title = "File Form";
+}
+
+<h2>Add New File</h2>
+@using (Html.BeginForm("UploadFile","LawFiles",FormMethod.Post,new { enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="file" name="file" id="file" class="btn btn-primary" style="display:inline" />
+            </div>
+            <div class="form-group">
+                <label>Select Judge</label>
+                @Html.DropDownListFor(f => f.SelectedJudge, new SelectList(Model.Judges, "JudgeId", "JudgeName"), "Select Judge", new { @class = "form-control" })
+            </div>
+            <div>
+                <label>Select Court</label>
+                @Html.DropDownListFor(f => f.SelectedCourt, new SelectList(Model.Courts, "CourtId", "CourtName"), "Select Judge", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FileYear)
+                @Html.TextBoxFor(m => m.FileYear, new { @class = "form-control", placeholder = "e.g 2007" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(f => f.FileAbstract)
+                @Html.TextAreaFor(m => m.FileAbstract, new { @class = "form-control", rows = "5" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.FileDescription)
+                @Html.TextAreaFor(m => m.FileDescription, new { @class = "form-control", rows = "5" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FileRemarks)
+                @Html.TextAreaFor(m => m.FileRemarks, new { @class = "form-control", rows = "5", placeholder = "If Multiple Judges, Mention Here." })
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <input type="submit" value="Submit" class="btn btn-success btn-block" />
+        </div>
+    </div>
+}
+    
+

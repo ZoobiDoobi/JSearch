@@ -13,5 +13,10 @@ namespace JSearch.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }

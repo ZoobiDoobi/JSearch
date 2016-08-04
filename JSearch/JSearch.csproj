@@ -211,6 +211,7 @@
     <Compile Include="Controllers\CourtsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JudgesController.cs" />
+    <Compile Include="Controllers\LawFilesController.cs" />
     <Compile Include="Controllers\LawsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
@@ -257,7 +258,9 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CourtsViewModel.cs" />
     <Compile Include="ViewModels\JudgeViewModel.cs" />
+    <Compile Include="ViewModels\LawFilesViewModel.cs" />
     <Compile Include="ViewModels\LawsViewModel.cs" />
+    <Compile Include="ViewModels\SectionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -348,10 +351,13 @@
     <Content Include="Views\Courts\Index.cshtml" />
     <Content Include="Views\Courts\Edit.cshtml" />
     <Content Include="Views\Courts\Delete.cshtml" />
+    <Content Include="Views\LawFiles\Create.cshtml" />
+    <Content Include="Views\Sections\Create.cshtml" />
+    <Content Include="Views\LawFiles\FileForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Sections\" />
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
