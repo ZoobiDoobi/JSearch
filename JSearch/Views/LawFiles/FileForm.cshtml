@@ -14,12 +14,10 @@
                 <input type="file" name="file" id="file" class="btn btn-primary" style="display:inline" />
             </div>
             <div class="form-group">
-                <label>Select Judge</label>
                 @Html.DropDownListFor(f => f.SelectedJudge, new SelectList(Model.Judges, "JudgeId", "JudgeName"), "Select Judge", new { @class = "form-control" })
             </div>
             <div>
-                <label>Select Court</label>
-                @Html.DropDownListFor(f => f.SelectedCourt, new SelectList(Model.Courts, "CourtId", "CourtName"), "Select Judge", new { @class = "form-control" })
+                @Html.DropDownListFor(f => f.SelectedCourt, new SelectList(Model.Courts, "CourtId", "CourtName"), "Select Court", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.FileYear)

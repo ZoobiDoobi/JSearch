@@ -19,10 +19,11 @@ namespace JSearch.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(LawsViewModel lawsViewModel)
         {
-            var sections = db.Sections.ToList();
-            var lawFileViewModel = new LawFilesViewModel() { Sections = sections };
+            int selectedLawId = lawsViewModel.SelectedLaw;
+            var sections = db.Sections.Where(s => s.LawId == selectedLawId).ToList();
+            var lawFileViewModel = new LawFilesViewModel() { Sections = sections,SelectedLaw = selectedLawId };
             return View(lawFileViewModel);
         }
 

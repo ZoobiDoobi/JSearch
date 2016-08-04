@@ -34,6 +34,9 @@ namespace JSearch.ViewModels
         [Display(Name ="Sections")]
         public string SectionName { get; set; }
 
+        public int SelectedSection { get; set; }
+        public int SelectedLaw { get; set; }
+
         public IEnumerable<Section> Sections { get; set; }
 
         public int SelectedJudge { get; set; }

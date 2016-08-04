@@ -6,10 +6,10 @@
 <h2>Laws</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","LawFiles",FormMethod.Post))
 {
     <div class="form-group">
-        @Html.DropDownListFor(m => m.Laws, new SelectList(Model.Laws, "LawId", "LawTitle"), "Select Law Type", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.SelectedLaw, new SelectList(Model.Laws, "LawId", "LawTitle"), "Select Law Type", new { @class = "form-control",autofocus="autofocus" })
         @Html.ValidationMessageFor(m => m.Laws)
     </div>
 

@@ -9,12 +9,12 @@
 {
     <div class="form-group">
         @Html.DisplayFor(s => s.SectionName)
-        @Html.DropDownListFor(s => s.Sections, new SelectList(Model.Sections,"SectionId","SectionName"),"Select a Section",new {@class = "form-control",autofocus="autofocus"} )
+        @Html.DropDownListFor(s => s.SelectedSection, new SelectList(Model.Sections,"SectionId","SectionName"),"Select a Section",new {@class = "form-control",autofocus="autofocus"} )
     </div>
 }
 <p>
     If you don't see your desired section here, Click <strong>Add Section</strong>.
 </p>
 <a href="@Url.Action("FileForm","LawFiles")" class="btn btn-primary">Add File</a>
-<a href="@Url.Action("Create","Sections")" class="btn btn-primary">Add Section</a>
+<a href="@Url.Action("Create","Sections",new { lawId = Model.SelectedLaw })" class="btn btn-primary">Add Section</a>
 
