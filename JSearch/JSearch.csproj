@@ -260,6 +260,7 @@
     <Compile Include="ViewModels\JudgeViewModel.cs" />
     <Compile Include="ViewModels\LawFilesViewModel.cs" />
     <Compile Include="ViewModels\LawsViewModel.cs" />
+    <Compile Include="ViewModels\MultiButtonAttribute.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -352,7 +353,7 @@
     <Content Include="Views\Courts\Edit.cshtml" />
     <Content Include="Views\Courts\Delete.cshtml" />
     <Content Include="Views\LawFiles\Create.cshtml" />
-    <Content Include="Views\Sections\Create.cshtml" />
+    <Content Include="Views\Sections\SectionForm.cshtml" />
     <Content Include="Views\LawFiles\FileForm.cshtml" />
   </ItemGroup>
   <ItemGroup>

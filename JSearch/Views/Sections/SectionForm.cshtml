@@ -1,0 +1,28 @@
+﻿@model JSearch.ViewModels.SectionsViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create New Section</h2>
+
+<div class="row">
+    @using (Html.BeginForm("Create","Section"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(s => s.SectionName)
+            @Html.TextBoxFor(s => s.SectionName, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(s => s.SectionName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.SectionRemarks)
+            @Html.TextBoxFor(s => s.SectionRemarks, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.SectionStatus)
+            @Html.TextBoxFor(s => s.SectionStatus, new { @class = "form-control", placeholder = "0 or 1" })
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    }
+</div>
+

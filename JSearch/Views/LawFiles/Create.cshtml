@@ -5,16 +5,16 @@
 
 <h2>Create New</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SectionForm","Sections"))
 {
     <div class="form-group">
         @Html.DisplayFor(s => s.SectionName)
         @Html.DropDownListFor(s => s.SelectedSection, new SelectList(Model.Sections,"SectionId","SectionName"),"Select a Section",new {@class = "form-control",autofocus="autofocus"} )
     </div>
+    <p>
+        If you don't see your desired section here, Click <strong>Add Section</strong>.
+    </p>
+    <button type="submit" class="btn btn-primary">Add Further Subsection</button>
 }
-<p>
-    If you don't see your desired section here, Click <strong>Add Section</strong>.
-</p>
-<a href="@Url.Action("FileForm","LawFiles")" class="btn btn-primary">Add File</a>
-<a href="@Url.Action("Create","Sections",new { lawId = Model.SelectedLaw })" class="btn btn-primary">Add Section</a>
-
+<br />
+<a href="@Url.Action("FileForm","LawFiles",new { sectionId = Model.SelectedSection })" class="btn btn-primary">Add File</a>
