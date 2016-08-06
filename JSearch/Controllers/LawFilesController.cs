@@ -19,13 +19,13 @@ namespace JSearch.Controllers
             return View();
         }
 
-        public ActionResult Create(LawsViewModel lawsViewModel)
-        {
-            int selectedLawId = lawsViewModel.SelectedLaw;
-            var sections = db.Sections.Where(s => s.LawId == selectedLawId).ToList();
-            var lawFileViewModel = new LawFilesViewModel() { Sections = sections,SelectedLaw = selectedLawId };
-            return View(lawFileViewModel);
-        }
+        //public ActionResult Create(LawsViewModel lawsViewModel)
+        //{
+        //    int selectedLawId = lawsViewModel.SelectedLaw;
+        //    var sections = db.Sections.Where(s => s.LawId == selectedLawId).ToList();
+        //    var lawFileViewModel = new LawFilesViewModel() { Sections = sections,SelectedLaw = selectedLawId };
+        //    return View(lawFileViewModel);
+        //}
 
         [HttpGet]
         public ActionResult FileForm()

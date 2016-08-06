@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JSearch.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace JSearch.ViewModels
     {
         //public int SectionId { get; set; }
         //public int LawId { get; set; }
-        public int SecRefId { get; set; }
         public int SelectedSection { get; set; }
+        public int SelectedLawId { get; set; }
 
         [Required]
         [Display(Name ="Section Name")]
@@ -22,6 +23,8 @@ namespace JSearch.ViewModels
 
         [Display(Name ="Status")]
         public int SectionStatus { get; set; }
+
+        public IEnumerable<Section> Sections { get; set; }
 
 
     }

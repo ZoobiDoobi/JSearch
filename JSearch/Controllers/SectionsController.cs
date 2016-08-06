@@ -12,22 +12,31 @@ namespace JSearch.Controllers
     public class SectionsController : Controller
     {
         public int LawId { get; set; } //Temporary Implementation
-        public int SectionId { get; set; } //Temporary Implementation
+        public int SectionRefId { get; set; } //Temporary Implementation
 
         JSearchContext db = new JSearchContext();
         // GET: Sections
         public ActionResult Index()
         {
+
+            return View();
+        }
+        
+        [HttpGet]
+        public ActionResult SectionForm()
+        {
+            //This Method here returns the view containing the last form "SectionForm" and it is Http
             return View();
         }
         [HttpPost]
-        public ActionResult SectionForm(LawFilesViewModel lawFilesViewModel)
+        public ActionResult GetSections(LawsViewModel lawsViewModel)
         {
-            SectionId = lawFilesViewModel.SelectedSection;
-            LawId = lawFilesViewModel.SelectedLaw;
-            return View();
+            var sections = db.Sections.Where(s => s.LawId == lawsViewModel.SelectedLaw).ToList();
+            SectionsViewModel sectionsViewModel = new SectionsViewModel() { Sections = sections,SelectedLawId=lawsViewModel.SelectedLaw };
+            return View(sectionsViewModel);
         }
 
+        //This action saves the data that is filled in the Last form
         [HttpPost]
         public ActionResult Create(SectionsViewModel sectionViewModel)
         {
@@ -38,16 +47,18 @@ namespace JSearch.Controllers
                 SectionId = maxId,
                 SectionName = sectionViewModel.SectionName,
                 SectionCode = "S-" + maxId,
-                LawId = LawId,
+                LawId = sectionViewModel.SelectedLawId,
                 SectionRemarks = sectionViewModel.SectionRemarks,
                 SectionStatus = sectionViewModel.SectionStatus,
                 SectionDateTimeStamp = DateTime.Now,
                 TerminalName = Environment.MachineName,
                 UserId = User.Identity.GetUserId(),
-                SectionRefId = SectionId
+                SectionRefId = sectionViewModel.SelectedSection
             };
+            db.Sections.Add(section);
+            db.SaveChanges();
 
-            return RedirectToAction("Create");
+            return RedirectToAction("Create","LawFiles");
         }
 
     }
