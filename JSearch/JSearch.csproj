@@ -357,6 +357,7 @@
     <Content Include="Views\LawFiles\FileForm.cshtml" />
     <Content Include="Views\Sections\Index.cshtml" />
     <Content Include="Views\Sections\GetSections.cshtml" />
+    <Content Include="Views\LawFiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

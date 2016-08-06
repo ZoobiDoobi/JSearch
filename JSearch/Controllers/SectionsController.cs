@@ -23,7 +23,7 @@ namespace JSearch.Controllers
         }
         
         [HttpGet]
-        public ActionResult SectionForm()
+        public ActionResult SectionForm(int SelectedLawId,int SelectedSection)
         {
             //This Method here returns the view containing the last form "SectionForm" and it is Http
             return View();
@@ -38,7 +38,7 @@ namespace JSearch.Controllers
 
         //This action saves the data that is filled in the Last form
         [HttpPost]
-        public ActionResult Create(SectionsViewModel sectionViewModel)
+        public ActionResult SectionForm(SectionsViewModel sectionViewModel,int SelectedLawId,int SelectedSection)
         {
             var maxId = db.Sections.Max(s => s.SectionId) + 1;
 
@@ -47,18 +47,18 @@ namespace JSearch.Controllers
                 SectionId = maxId,
                 SectionName = sectionViewModel.SectionName,
                 SectionCode = "S-" + maxId,
-                LawId = sectionViewModel.SelectedLawId,
+                LawId = SelectedLawId,
                 SectionRemarks = sectionViewModel.SectionRemarks,
                 SectionStatus = sectionViewModel.SectionStatus,
                 SectionDateTimeStamp = DateTime.Now,
                 TerminalName = Environment.MachineName,
                 UserId = User.Identity.GetUserId(),
-                SectionRefId = sectionViewModel.SelectedSection
+                SectionRefId = SelectedSection
             };
             db.Sections.Add(section);
             db.SaveChanges();
 
-            return RedirectToAction("Create","LawFiles");
+            return RedirectToAction("Index");
         }
 
     }

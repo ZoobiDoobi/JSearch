@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("SectionForm", "Sections", FormMethod.Get))
 {
-    @Html.HiddenFor(s => s.SelectedLawId,new { id="selectedLaw" })
     <div class="form-group">
         @Html.DisplayFor(s => s.SectionName)
         @Html.DropDownListFor(s => s.SelectedSection, new SelectList(Model.Sections, "SectionId", "SectionName"), "Select a Section", new { @class = "form-control", autofocus = "autofocus" })

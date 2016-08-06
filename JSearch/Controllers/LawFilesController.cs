@@ -19,14 +19,6 @@ namespace JSearch.Controllers
             return View();
         }
 
-        //public ActionResult Create(LawsViewModel lawsViewModel)
-        //{
-        //    int selectedLawId = lawsViewModel.SelectedLaw;
-        //    var sections = db.Sections.Where(s => s.LawId == selectedLawId).ToList();
-        //    var lawFileViewModel = new LawFilesViewModel() { Sections = sections,SelectedLaw = selectedLawId };
-        //    return View(lawFileViewModel);
-        //}
-
         [HttpGet]
         public ActionResult FileForm()
         {
@@ -38,7 +30,7 @@ namespace JSearch.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file, LawFilesViewModel lawFilesViewModel)
+        public ActionResult FileForm(HttpPostedFileBase file, LawFilesViewModel lawFilesViewModel)
         {
             string path = string.Empty;
             if (file != null && file.ContentLength > 0)
@@ -77,7 +69,7 @@ namespace JSearch.Controllers
             };
             db.LawFiles.Add(newFile);
             db.SaveChanges();
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
     }
 }
