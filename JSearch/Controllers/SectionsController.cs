@@ -11,19 +11,17 @@ namespace JSearch.Controllers
 {
     public class SectionsController : Controller
     {
-        public int LawId { get; set; } //Temporary Implementation
-        public int SectionRefId { get; set; } //Temporary Implementation
 
-        JSearchContext db = new JSearchContext();
+        JSearchEntities db = new JSearchEntities();
         // GET: Sections
         public ActionResult Index()
         {
-
-            return View();
+            var sections = db.Sections.OrderByDescending(s => s.SectionDateTimeStamp).ToList();
+            return View(sections);
         }
         
         [HttpGet]
-        public ActionResult SectionForm(int SelectedLawId,int SelectedSection)
+        public ActionResult SectionForm(int SelectedLawId,int? SelectedSection)
         {
             //This Method here returns the view containing the last form "SectionForm" and it is Http
             return View();
@@ -38,8 +36,9 @@ namespace JSearch.Controllers
 
         //This action saves the data that is filled in the Last form
         [HttpPost]
-        public ActionResult SectionForm(SectionsViewModel sectionViewModel,int SelectedLawId,int SelectedSection)
+        public ActionResult SectionForm(SectionsViewModel sectionViewModel,int SelectedLawId,int? SelectedSection)
         {
+            
             var maxId = db.Sections.Max(s => s.SectionId) + 1;
 
             var section = new Section()
@@ -53,7 +52,7 @@ namespace JSearch.Controllers
                 SectionDateTimeStamp = DateTime.Now,
                 TerminalName = Environment.MachineName,
                 UserId = User.Identity.GetUserId(),
-                SectionRefId = SelectedSection
+                SectionRefId = Convert.ToInt32(SelectedSection)
             };
             db.Sections.Add(section);
             db.SaveChanges();

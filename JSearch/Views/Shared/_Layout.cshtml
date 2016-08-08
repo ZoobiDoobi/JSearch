@@ -22,7 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Laws", "GetLaws", "Laws")</li>
-                    <li>@Html.ActionLink("Law Files", "Create", "LawFiles")</li>
+                    <li>@Html.ActionLink("Sections", "Index", "Sections")</li>
                     <li>@Html.ActionLink("Judges", "Index", "Judges")</li>   
                     <li>@Html.ActionLink("Courts", "Index", "Courts")</li>
                 </ul>
@@ -38,8 +38,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>

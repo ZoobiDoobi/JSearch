@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm("SectionForm", "Sections", FormMethod.Get))
 {
+    @Html.HiddenFor(s => s.SelectedLawId)
     <div class="form-group">
         @Html.DisplayFor(s => s.SectionName)
         @Html.DropDownListFor(s => s.SelectedSection, new SelectList(Model.Sections, "SectionId", "SectionName"), "Select a Section", new { @class = "form-control", autofocus = "autofocus" })
@@ -19,5 +20,4 @@
     </p>
     <button type="submit" class="btn btn-primary">Add Section</button>
 }
-<br />
-<a href="@Url.Action("FileForm","LawFiles",new { sectionId = Model.SelectedSection })" class="btn btn-primary">Add File</a>
+

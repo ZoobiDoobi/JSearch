@@ -9,15 +9,15 @@ namespace JSearch.ViewModels
 {
     public class SectionsViewModel
     {
-        //public int SectionId { get; set; }
-        //public int LawId { get; set; }
-        public int SelectedSection { get; set; }
         public int SelectedLawId { get; set; }
+
+        public int SelectedSection { get; set; }
 
         [Required]
         [Display(Name ="Section Name")]
         public string SectionName { get; set; }
 
+        [StringLength(300)]
         [Display(Name ="Remarks")]
         public string SectionRemarks { get; set; }
 

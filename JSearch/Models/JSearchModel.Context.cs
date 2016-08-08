@@ -13,9 +13,9 @@ namespace JSearch.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JSearchContext : DbContext
+    public partial class JSearchEntities : DbContext
     {
-        public JSearchContext()
+        public JSearchEntities()
             : base("name=JSearchEntities")
         {
         }

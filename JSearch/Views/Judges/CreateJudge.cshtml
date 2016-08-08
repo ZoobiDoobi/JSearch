@@ -7,7 +7,7 @@
 
 <h2>Add Judge</h2>
 
-@using (Html.BeginForm("CreateJudge","Judge"))
+@using (Html.BeginForm("CreateJudge","Judges",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -19,13 +19,13 @@
 
     <div class="form-group">
         @Html.LabelFor(j => j.JudgeRemarks)
-        @Html.TextBoxFor(j => j.JudgeRemarks, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(j => j.JudgeRemarks, new { @class = "form-control"})
         @Html.ValidationMessageFor(j => j.JudgeRemarks)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(j => j.JudgeStatus)
-        @Html.TextBoxFor(j => j.JudgeStatus, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(j => j.JudgeStatus, new { @class = "form-control"})
         @Html.ValidationMessageFor(j => j.JudgeStatus)
     </div>
 

@@ -14,11 +14,11 @@ namespace JSearch.Controllers
     [Authorize]
     public class JudgesController : Controller
     {
-        JSearchContext context = new JSearchContext();
+        JSearchEntities db = new JSearchEntities();
         // GET: Judge
         public ActionResult Index()
         {
-            var judges =  context.Judges.Where( m => m.JudgeStatus == 1).ToList();
+            var judges =  db.Judges.Where( m => m.JudgeStatus == 1).ToList();
             return View(judges);
         }
 
@@ -29,7 +29,7 @@ namespace JSearch.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Judge judge = context.Judges.Find(judgeId);
+            Judge judge = db.Judges.Find(judgeId);
             JudgeViewModel judgeViewModel = new JudgeViewModel()
             {
                 JudgeId = judgeId,
@@ -50,12 +50,12 @@ namespace JSearch.Controllers
         {
             if (ModelState.IsValid)
             {
-                var judge = context.Judges.Find(judgeViewModel.JudgeId);
+                var judge = db.Judges.Find(judgeViewModel.JudgeId);
                 judge.JudgeId = judgeViewModel.JudgeId;
                 judge.JudgeName = judgeViewModel.JudgeName;
                 judge.JudgeRemarks = judgeViewModel.JudgeRemarks;
                 judge.JudgeStatus = judgeViewModel.JudgeStatus;
-                context.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +71,7 @@ namespace JSearch.Controllers
         [HttpPost] 
         public ActionResult CreateJudge(JudgeViewModel judgeViewModel)
         {
-            var maxId = context.Judges.Max(j => j.JudgeId) + 1;
+            var maxId = db.Judges.Max(j => j.JudgeId) + 1;
             var userId = User.Identity.GetUserId();
             var judge = new Judge()
             {
@@ -84,16 +84,16 @@ namespace JSearch.Controllers
                 UserId = userId,
                 TerminalName = Environment.MachineName
             };
-            context.Judges.Add(judge);
-            context.SaveChanges();
+            db.Judges.Add(judge);
+            db.SaveChanges();
 
-            return RedirectToAction("CreateJudge", "Judge");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Details(int judgeId)
         {
-            var judge = context.Judges.Find(judgeId);
+            var judge = db.Judges.Find(judgeId);
             if (judge == null)
             {
                 return HttpNotFound();
@@ -111,7 +111,7 @@ namespace JSearch.Controllers
         [HttpGet]
         public ActionResult Delete(int judgeId)
         {
-            var judge = context.Judges.Find(judgeId);
+            var judge = db.Judges.Find(judgeId);
             if (judge == null)
             {
                 return HttpNotFound();
@@ -130,9 +130,9 @@ namespace JSearch.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int judgeId)
         {
-            var judge = context.Judges.Find(judgeId);
+            var judge = db.Judges.Find(judgeId);
             judge.JudgeStatus = 0;
-            context.SaveChanges();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

@@ -1,7 +1,51 @@
-﻿
+﻿@model IEnumerable<JSearch.Models.Section>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Latest Addes Sections</h2>
 
+
+<table class="table" id="sectionsTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SectionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SectionRemarks)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SectionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SectionRemarks)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.SectionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SectionId }) |
+                @Html.ActionLink("Add File", "FileForm", "LawFiles", new { id = item.SectionId }, new { @style = "color:green" })
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#sectionsTable").DataTable();
+        });
+    </script>
+    }

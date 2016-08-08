@@ -11,11 +11,11 @@ namespace JSearch.Controllers
 {
     public class CourtsController : Controller
     {
-        JSearchContext context = new JSearchContext();
+        JSearchEntities db = new JSearchEntities();
         // GET: Courts
         public ActionResult Index()
         {
-            var courts = context.Courts.Where(c => c.CourtStatus == 1).ToList();
+            var courts = db.Courts.Where(c => c.CourtStatus == 1).ToList();
             return View(courts);
         }
 
@@ -31,7 +31,7 @@ namespace JSearch.Controllers
         {
             if (ModelState.IsValid)
             {
-                var maxId = context.Courts.Max(m => m.CourtId) + 1;
+                var maxId = db.Courts.Max(m => m.CourtId) + 1;
                 var userId = User.Identity.GetUserId();
                 var court = new Court()
                 {
@@ -45,8 +45,8 @@ namespace JSearch.Controllers
                     TerminalName = Environment.MachineName
                 };
 
-                context.Courts.Add(court);
-                context.SaveChanges();
+                db.Courts.Add(court);
+                db.SaveChanges();
                 return RedirectToAction("Create");
             }
             else
@@ -58,7 +58,7 @@ namespace JSearch.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var court = context.Courts.Find(id);
+            var court = db.Courts.Find(id);
             if (court == null)
             {
                 return HttpNotFound();
@@ -77,13 +77,13 @@ namespace JSearch.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CourtsViewModel courtsViewModel)
         {
-            var court = context.Courts.Find(courtsViewModel.CourtId);
+            var court = db.Courts.Find(courtsViewModel.CourtId);
             if (ModelState.IsValid)
             {
                 court.CourtName = courtsViewModel.CourtName;
                 court.CourtRemarks = courtsViewModel.CourtRemarks;
                 court.CourtStatus = courtsViewModel.CourtStatus;
-                context.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(courtsViewModel);
@@ -92,7 +92,7 @@ namespace JSearch.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var court = context.Courts.Find(id);
+            var court = db.Courts.Find(id);
             if (court == null)
             {
                 return HttpNotFound();
@@ -111,9 +111,9 @@ namespace JSearch.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var court = context.Courts.Find(id);
+            var court = db.Courts.Find(id);
             court.CourtStatus = 0;
-            context.SaveChanges();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

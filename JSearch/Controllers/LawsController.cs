@@ -11,7 +11,7 @@ namespace JSearch.Controllers
     [Authorize]
     public class LawsController : Controller
     {
-        JSearchContext context = new JSearchContext();
+        JSearchEntities db = new JSearchEntities();
         // GET: Laws
         public ActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace JSearch.Controllers
         [HttpGet]
         public ActionResult GetLaws()
         {
-            var laws = context.Laws.Where(l => l.LawId != 0).ToList();
+            var laws = db.Laws.Where(l => l.LawId != 0).ToList();
             LawsViewModel lawsViewModel = new LawsViewModel { Laws = laws };
             return View(lawsViewModel);
         }

@@ -22,6 +22,8 @@
             @Html.LabelFor(s => s.SectionStatus)
             @Html.TextBoxFor(s => s.SectionStatus, new { @class = "form-control", placeholder = "0 or 1" })
         </div>
+        @Html.HiddenFor(s => s.SelectedLawId)
+        @Html.HiddenFor(s => s.SelectedSection)
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     }
 </div>

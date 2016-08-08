@@ -18,9 +18,9 @@ namespace JSearch.Models
         public string LawCode { get; set; }
         public string LawTitle { get; set; }
         public string LawRemarks { get; set; }
-        public int? LawStatus { get; set; }
+        public Nullable<int> LawStatus { get; set; }
         public string UserId { get; set; }
-        public DateTime? LawDateTimeStamp { get; set; }
+        public Nullable<System.DateTime> LawDateTimeStamp { get; set; }
         public string TerminalName { get; set; }
     }
 }

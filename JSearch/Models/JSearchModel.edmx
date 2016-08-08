@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JSearchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JSearchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Courts">
           <Key>
             <PropertyRef Name="CourtId" />
@@ -27,8 +27,8 @@
           <Property Name="FileSectionCode" Type="nvarchar" MaxLength="100" />
           <Property Name="SectionId" Type="int" />
           <Property Name="FileId" Type="int" />
-          <Property Name="UserId" Type="nchar" MaxLength="10" />
-          <Property Name="TerminalName" Type="nchar" MaxLength="10" />
+          <Property Name="UserId" Type="nchar" MaxLength="128" />
+          <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
           <Property Name="FileSectionStatus" Type="int" />
           <Property Name="FSDateTimeStamp" Type="datetime" />
         </EntityType>
@@ -87,7 +87,7 @@
           <Property Name="SectionRefId" Type="int" />
           <Property Name="SectionStatus" Type="int" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
-          <Property Name="SectionRemarks" Type="nchar" MaxLength="10" />
+          <Property Name="SectionRemarks" Type="nvarchar(max)" />
           <Property Name="SectionDateTimeStamp" Type="datetime" />
           <Property Name="TerminalName" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -99,8 +99,7 @@
           <EntitySet Name="Laws" EntityType="Self.Laws" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JSearchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -126,8 +125,8 @@
           <Property Name="FileSectionCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SectionId" Type="Int32" />
           <Property Name="FileId" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="TerminalName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
+          <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FileSectionStatus" Type="Int32" />
           <Property Name="FSDateTimeStamp" Type="DateTime" Precision="3" />
         </EntityType>
@@ -186,7 +185,7 @@
           <Property Name="SectionRefId" Type="Int32" />
           <Property Name="SectionStatus" Type="Int32" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SectionRemarks" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SectionRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SectionDateTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="TerminalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
