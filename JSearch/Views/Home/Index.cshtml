@@ -7,5 +7,33 @@
 </div>
 
 <div class="row">
-    
+    <div class="col-md-12">
+        <div id="remote">
+            <input class="form-control typeahead " type="text" placeholder="Search Judgements" />
+        </div>
+    </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var files = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('FileTitle'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/Search?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#remote .typeahead').typeahead({
+                minLength: 3,
+                highlight : true
+            },
+                {
+                name: 'LawFiles',
+                display: 'FileTitle',
+                source: files
+            });
+        });
+    </script>
+    }

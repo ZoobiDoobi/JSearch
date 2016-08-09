@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace JSearch.Controllers
 {
+    [Authorize]
     public class CourtsController : Controller
     {
         JSearchEntities db = new JSearchEntities();
