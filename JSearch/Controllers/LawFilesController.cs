@@ -27,66 +27,101 @@ namespace JSearch.Controllers
             var courts = db.Courts.ToList();
             var sections = db.Sections.OrderByDescending(s => s.SectionDateTimeStamp).ToList();
 
-            LawFilesViewModel lawFilesViewModel = new LawFilesViewModel() { Courts = courts, Judges = judges,Sections = sections };
+            LawFilesViewModel lawFilesViewModel = new LawFilesViewModel() { Courts = courts, Judges = judges, Sections = sections };
             return View(lawFilesViewModel);
         }
 
         [HttpPost]
-        public ActionResult FileForm(HttpPostedFileBase file, LawFilesViewModel lawFilesViewModel,int id)
+        public ActionResult FileForm(IEnumerable<HttpPostedFileBase> file, LawFilesViewModel lawFilesViewModel, int id)
         {
             string path = string.Empty;
-            if (file != null && file.ContentLength > 0)
+            foreach (var item in file)
             {
-                try
+                string filextension = Path.GetExtension(item.FileName);
+                if (item != null && item.ContentLength > 0 && filextension == ".pdf")
                 {
-                    path = Path.Combine(Server.MapPath("~/Files/"), Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    ViewBag.Message = "File Uploaded Successfully";
+                    try
+                    {
+                        path = Path.Combine(Server.MapPath("~/Files/"), Path.GetFileName(item.FileName));
+                        item.SaveAs(path);
+                        ViewBag.Message = "File Uploaded Successfully";
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "Error in Uploading Files" + ex.Message;
+                        return RedirectToAction("FileForm");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    ViewBag.Message = "Error in Uploading File";
+                    ViewBag.Message = "You have not specified a file.";
                 }
-            }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
-            }
-            var maxFileId = db.LawFiles.Max(f => f.FileId) + 1;
-            var newFile = new LawFile()
-            {
-                FileId = maxFileId,
-                FileCode = "F-" + maxFileId,
-                CourtId = lawFilesViewModel.SelectedCourt,
-                JudgeId = lawFilesViewModel.SelectedJudge,
-                FileAbstract = lawFilesViewModel.FileAbstract,
-                FileDateTimeStamp = DateTime.Now,
-                FileDescription = lawFilesViewModel.FileDescription,
-                FilePath = path,
-                FileRemarks = lawFilesViewModel.FileRemarks,
-                FileTitle = Path.GetFileName(file.FileName),
-                FileYear = lawFilesViewModel.FileYear,
-                TerminalName = Environment.MachineName,
-                UserId = User.Identity.GetUserId()
-            };
+                var maxFileId = db.LawFiles.Max(f => f.FileId) + 1;
+                var newFile = new LawFile()
+                {
+                    FileId = maxFileId,
+                    FileCode = "F-" + maxFileId,
+                    CourtId = lawFilesViewModel.SelectedCourt,
+                    JudgeId = lawFilesViewModel.SelectedJudge,
+                    FileAbstract = lawFilesViewModel.FileAbstract,
+                    FileDateTimeStamp = DateTime.Now,
+                    FileDescription = lawFilesViewModel.FileDescription,
+                    FilePath = ResolveServerUrl(VirtualPathUtility.ToAbsolute("~/Files/"+Path.GetFileName(path)),false),
+                    FileRemarks = lawFilesViewModel.FileRemarks,
+                    FileTitle = Path.GetFileNameWithoutExtension(path),
+                    FileYear = lawFilesViewModel.FileYear,
+                    TerminalName = Environment.MachineName,
+                    UserId = User.Identity.GetUserId()
+                };
 
-            var fileSectionMaxId = db.FileSections.Max(fs => fs.FileSectionId) + 1;
+                var fileSectionMaxId = db.FileSections.Max(fs => fs.FileSectionId) + 1;
 
-            var sectionFile = new FileSection()
-            {
-                FileSectionId = fileSectionMaxId,
-                FileSectionCode = "FS-" + fileSectionMaxId,
-                FileId = maxFileId,
-                FSDateTimeStamp = DateTime.Now,
-                //SectionId = lawFilesViewModel.SelectedSection,
-                SectionId = id,
-                TerminalName = Environment.MachineName,
-                UserId = User.Identity.GetUserId()
-            };
-            db.LawFiles.Add(newFile);
-            db.FileSections.Add(sectionFile);
-            db.SaveChanges();
+                var sectionFile = new FileSection()
+                {
+                    FileSectionId = fileSectionMaxId,
+                    FileSectionCode = "FS-" + fileSectionMaxId,
+                    FileId = maxFileId,
+                    FSDateTimeStamp = DateTime.Now,
+                    SectionId = id,
+                    TerminalName = Environment.MachineName,
+                    UserId = User.Identity.GetUserId()
+                };
+                db.LawFiles.Add(newFile);
+                db.FileSections.Add(sectionFile);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Downloads()
+        {
+            var dir = new DirectoryInfo(Server.MapPath("~/Files/"));
+            FileInfo[] fileNames = dir.GetFiles("*.*");
+            List<string> filesList = new List<string>();
+
+            foreach (var item in fileNames)
+            {
+                filesList.Add(item.Name);
+            }
+            return View(filesList);
+        }
+
+        public FileResult Download(string FileName)
+        {
+            return File(Server.MapPath("~/Files/") + FileName, System.Net.Mime.MediaTypeNames.Application.Pdf);
+        }
+
+        public static string ResolveServerUrl(string serverUrl, bool forceHttps)
+        {
+            if (serverUrl.IndexOf("://") > -1)
+            {
+                return serverUrl;
+            }
+
+            string newUrl = serverUrl;
+            Uri originalUri = System.Web.HttpContext.Current.Request.Url;
+            newUrl = (forceHttps ? "https" : originalUri.Scheme) + "://" + originalUri.Authority + newUrl;
+            return newUrl;
         }
     }
 }

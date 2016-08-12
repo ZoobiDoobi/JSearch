@@ -20,7 +20,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('FileTitle'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/api/Search?query=%QUERY',
+                    url: 'http://202.142.179.246/JSearch/api/Search?query=%QUERY',
                     wildcard: '%QUERY'
                 }
             });

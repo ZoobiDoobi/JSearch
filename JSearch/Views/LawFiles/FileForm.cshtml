@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <input type="file" name="file" id="file" class="btn btn-primary" style="display:inline" required />
+                <input type="file" name="file" id="file" class="btn btn-primary" style="display:inline" required multiple accept=".pdf" />
             </div>
             @Html.HiddenFor(s => s.SelectedSection)
             @*<div class="form-group">
@@ -43,6 +43,9 @@
                 @Html.TextAreaFor(m => m.FileRemarks, new { @class = "form-control", rows = "5", placeholder = "If Multiple Judges, Mention Here." })
             </div>
         </div>
+    </div>
+    <div>
+        @ViewBag.Message
     </div>
     <div class="container">
         <div class="row">

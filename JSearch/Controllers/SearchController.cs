@@ -40,5 +40,10 @@ namespace JSearch.Controllers
                 .ToList();
             return Ok(lawFiles);
         }
+
+        //public FileResult Downlaod(string fileName)
+        //{
+        //    return File(Server.MapPath("~/Files/") + fileName, System.Net.Mime.MediaTypeNames.Application.Pdf);
+        //}
     }
 }
