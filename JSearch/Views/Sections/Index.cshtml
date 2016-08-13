@@ -7,7 +7,7 @@
 <h2>Latest Addes Sections</h2>
 
 
-<table class="table" id="sectionsTable">
+<table id="sectionsTable" class="display" cellspacing="0">
     <thead>
         <tr>
             <th>
@@ -45,7 +45,11 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $("#sectionsTable").DataTable();
+            $("#sectionsTable").DataTable({
+                "ordering":false,
+                "info": false,
+                "searching":true
+            });
         });
     </script>
     }

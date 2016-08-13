@@ -23,8 +23,8 @@ namespace JSearch.Controllers
         [HttpGet]
         public ActionResult FileForm(int id)
         {
-            var judges = db.Judges.ToList();
-            var courts = db.Courts.ToList();
+            var judges = db.Judges.OrderByDescending(j => j.JudgeDateTimeStamp).ToList();
+            var courts = db.Courts.OrderByDescending(c => c.CourtDateTimeStamp).ToList();
             var sections = db.Sections.OrderByDescending(s => s.SectionDateTimeStamp).ToList();
 
             LawFilesViewModel lawFilesViewModel = new LawFilesViewModel() { Courts = courts, Judges = judges, Sections = sections };
@@ -66,7 +66,7 @@ namespace JSearch.Controllers
                     FileAbstract = lawFilesViewModel.FileAbstract,
                     FileDateTimeStamp = DateTime.Now,
                     FileDescription = lawFilesViewModel.FileDescription,
-                    FilePath = ResolveServerUrl(VirtualPathUtility.ToAbsolute("~/Files/"+Path.GetFileName(path)),false),
+                    FilePath = ResolveServerUrl(VirtualPathUtility.ToAbsolute("~/Files/" + Path.GetFileName(path)), false),
                     FileRemarks = lawFilesViewModel.FileRemarks,
                     FileTitle = Path.GetFileNameWithoutExtension(path),
                     FileYear = lawFilesViewModel.FileYear,

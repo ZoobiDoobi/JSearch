@@ -27,7 +27,8 @@ namespace JSearch
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/datatables/css/datatables/datatables.bootstrap.css",
+                      "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/DataTables/css/jquery.dataTables.min.css",
                       "~/Content/typeahead.css",
                       "~/Content/site.css"));
         }
