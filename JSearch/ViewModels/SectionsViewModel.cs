@@ -22,9 +22,12 @@ namespace JSearch.ViewModels
         public string SectionRemarks { get; set; }
 
         [Display(Name ="Status")]
-        public int SectionStatus { get; set; }
+        [JStatus]
+        public int? SectionStatus { get; set; }
 
         public IEnumerable<Section> Sections { get; set; }
+
+        public IEnumerable<Law> Laws { get; set; }  
 
 
     }

@@ -10,6 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table" id="courts">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CourtName)
@@ -21,19 +22,30 @@
             Actions
         </th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourtName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourtRemarks)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourtId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourtId})
-        </td>
-    </tr>
-}
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourtName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourtRemarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.CourtId}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.CourtId})
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $("#courts").DataTable();
+        });
+   </script>
+}

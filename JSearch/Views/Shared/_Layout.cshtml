@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - PJA</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,8 +22,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Laws", "GetLaws", "Laws")</li>
                     <li>@Html.ActionLink("Sections", "Index", "Sections")</li>
-                    <li>@Html.ActionLink("Judges", "Index", "Judges")</li>   
+                    <li>@Html.ActionLink("Judges", "Index", "Judges")</li>
                     <li>@Html.ActionLink("Courts", "Index", "Courts")</li>
+                    <li>@Html.ActionLink("Law Files", "Index", "LawFiles")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

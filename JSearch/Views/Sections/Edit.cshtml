@@ -1,0 +1,32 @@
+﻿@model JSearch.ViewModels.SectionsViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm("Edit", "Sections", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(s => s.SectionName)
+        @Html.TextBoxFor(s => s.SectionName, new {@class = "form-control", autofocus = "autofocus"})
+        @Html.ValidationMessageFor(s => s.SectionName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.SectionRemarks)
+        @Html.TextBoxFor(s => s.SectionRemarks, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(s => s.SectionStatus)
+        @Html.TextBoxFor(s => s.SectionStatus, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.DropDownListFor(s => s.SelectedLawId, new SelectList(Model.Laws, "LawId","LawTitle"),"Select Law",new {@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(s => s.SelectedSection, new SelectList(Model.Sections, "SectionId", "SectionName"),"Select Section", new {@class = "form-control"})
+    </div>
+    <input type="submit" class="btn btn-primary"/>
+}

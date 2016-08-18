@@ -18,18 +18,19 @@ namespace JSearch.Controllers
         // GET: Judge
         public ActionResult Index()
         {
-            var judges =  db.Judges.Where( m => m.JudgeStatus == 1).ToList();
+            var judges =  db.Judges.Where( m => m.JudgeStatus == 1).OrderByDescending(j => j.JudgeDateTimeStamp).ToList();
             return View(judges);
         }
 
         [HttpGet]
         public ActionResult Edit(int judgeId)
         {
-            if (judgeId == null)
+            Judge judge = db.Judges.Find(judgeId);
+            if (judge == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Judge judge = db.Judges.Find(judgeId);
+            
             JudgeViewModel judgeViewModel = new JudgeViewModel()
             {
                 JudgeId = judgeId,
@@ -37,10 +38,6 @@ namespace JSearch.Controllers
                 JudgeRemarks = judge.JudgeRemarks,
                 JudgeStatus = judge.JudgeStatus
             };
-            if (judge == null)
-            {
-                return HttpNotFound();
-            }
             return View(judgeViewModel);
         }
 
@@ -71,23 +68,27 @@ namespace JSearch.Controllers
         [HttpPost] 
         public ActionResult CreateJudge(JudgeViewModel judgeViewModel)
         {
-            var maxId = db.Judges.Max(j => j.JudgeId) + 1;
-            var userId = User.Identity.GetUserId();
-            var judge = new Judge()
+            if (ModelState.IsValid)
             {
-                JudgeId = maxId,
-                JudgeCode = "J"+maxId,
-                JudgeName = judgeViewModel.JudgeName,
-                JudgeRemarks = judgeViewModel.JudgeRemarks,
-                JudgeStatus = judgeViewModel.JudgeStatus,
-                JudgeDateTimeStamp = DateTime.Now,
-                UserId = userId,
-                TerminalName = Environment.MachineName
-            };
-            db.Judges.Add(judge);
-            db.SaveChanges();
+                var maxId = db.Judges.Max(j => j.JudgeId) + 1;
+                var userId = User.Identity.GetUserId();
+                var judge = new Judge()
+                {
+                    JudgeId = maxId,
+                    JudgeCode = "J" + maxId,
+                    JudgeName = judgeViewModel.JudgeName,
+                    JudgeRemarks = judgeViewModel.JudgeRemarks,
+                    JudgeStatus = judgeViewModel.JudgeStatus,
+                    JudgeDateTimeStamp = DateTime.Now,
+                    UserId = userId,
+                    TerminalName = Environment.MachineName
+                };
+                db.Judges.Add(judge);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            return View(judgeViewModel);
         }
 
         [HttpGet]

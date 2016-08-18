@@ -1,7 +1,60 @@
-﻿
+﻿@model IEnumerable<JSearch.Models.LawFile>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<p>File has been added successfully!</p>
+<h2>Latest Added Files</h2>
+
+<table id="files">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileRemarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileYear)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileRemarks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileYear)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.FileId}) |
+                @Html.ActionLink("Details", "Details", new {id = item.FileId}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.FileId})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $("#files").DataTable();
+        });
+    </script>
+}

@@ -6,7 +6,7 @@
 <h2>Create New Section</h2>
 
 <div class="row">
-    @using (Html.BeginForm("SectionForm","Sections"))
+    @using (Html.BeginForm("SectionForm","Sections",FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">
@@ -21,6 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(s => s.SectionStatus)
             @Html.TextBoxFor(s => s.SectionStatus, new { @class = "form-control", placeholder = "0 or 1" })
+            @Html.ValidationMessageFor(s => s.SectionStatus)
         </div>
         @Html.HiddenFor(s => s.SelectedLawId)
         @Html.HiddenFor(s => s.SelectedSection)

@@ -6,9 +6,9 @@
 
 <h2>Latest Addes Sections</h2>
 
-
-<table id="sectionsTable" class="display" cellspacing="0">
-    <thead>
+<div>
+    <table id="sectionsTable" cellspacing="0">
+        <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.SectionName)
@@ -20,36 +20,36 @@
                 Actions
             </th>
         </tr>
-    </thead>
-@foreach (var item in Model)
-{
-    <tbody>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SectionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SectionRemarks)
-            </td>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionRemarks)
+                </td>
 
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.SectionId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SectionId }) |
-                @Html.ActionLink("Add File", "FileForm", "LawFiles", new { id = item.SectionId }, new { @style = "color:green" })
-            </td>
-        </tr>
-    </tbody>
-}
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new {id = item.SectionId}) |
+                    @Html.ActionLink("Edit","Edit",new {id = item.SectionId}) |
+                    @Html.ActionLink("Add File", "FileForm", "LawFiles", new {id = item.SectionId}, new {@style = "color:green"})
+                </td>
+            </tr>
+            </tbody>
+        }
+    </table>
+</div>
 
-</table>
 @section scripts{
     <script>
         $(document).ready(function () {
             $("#sectionsTable").DataTable({
-                "ordering":false,
-                "info": false,
-                "searching":true
-            });
+                "ordering": false,
+                "bPaginate": false
+        });
         });
     </script>
     }

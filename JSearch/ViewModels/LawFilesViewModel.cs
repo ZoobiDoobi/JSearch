@@ -9,11 +9,6 @@ namespace JSearch.ViewModels
 {
     public class LawFilesViewModel
     {
-        public int LawId { get; set; }
-        public int SectionId { get; set; }
-        public int FileId { get; set; }
-        public int JudgeId { get; set; }
-        public int CourtId { get; set; }
 
         [Required]
         [Display(Name ="Title")]
@@ -34,16 +29,15 @@ namespace JSearch.ViewModels
         [Display(Name ="Sections")]
         public string SectionName { get; set; }
 
-        public int SelectedSection { get; set; }
-        public int SelectedLaw { get; set; }
-
-        public IEnumerable<Section> Sections { get; set; }
-
         public int SelectedJudge { get; set; }
         public int SelectedCourt { get; set; }
-
+        public int SelectedSection { get; set; }
+        
         [Display(Name ="Judge")]
         public IEnumerable<Judge> Judges { get; set; }
+
         public IEnumerable<Court> Courts { get; set; }
+
+        public IEnumerable<Section> Sections { get; set; }
     }
 }

@@ -1,27 +1,23 @@
 ﻿@model JSearch.ViewModels.LawFilesViewModel
 @{
-    ViewBag.Title = "File Form";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Add New File</h2>
-@using (Html.BeginForm("FileForm","LawFiles",FormMethod.Post,new { enctype="multipart/form-data"}))
+<h2>Edit</h2>
+@using (Html.BeginForm("Edit","LawFiles",FormMethod.Post,new {enctype="multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <input type="file" name="file" id="file" class="btn btn-primary" style="display:inline" required accept=".pdf" />
+                <input type="file" name="file" id="file" class="btn btn-primary" style="display: inline" required accept=".pdf"/>
             </div>
-            @Html.HiddenFor(s => s.SelectedSection)
-            @*<div class="form-group">
-                @Html.DropDownListFor(f => f.SelectedSection, new  SelectList(Model.Sections,"SectionId","SectionName"),"Select Section",new {@class="form-control",required="required"})
-            </div>*@
             <div class="form-group">
-                @Html.DropDownListFor(f => f.SelectedJudge, new SelectList(Model.Judges, "JudgeId", "JudgeName"), "Select Judge", new { @class = "form-control", required="required" })
+                @Html.DropDownListFor(f => f.SelectedJudge, new SelectList(Model.Judges, "JudgeId", "JudgeName"), "Select Judge", new { @class = "form-control", required = "required" })
             </div>
             <div>
-                @Html.DropDownListFor(f => f.SelectedCourt, new SelectList(Model.Courts, "CourtId", "CourtName"), "Select Court", new { @class = "form-control",required="required" })
+                @Html.DropDownListFor(f => f.SelectedCourt, new SelectList(Model.Courts, "CourtId", "CourtName"), "Select Court", new { @class = "form-control", required = "required" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.FileYear)
@@ -33,10 +29,10 @@
             </div>
         </div>
         <div class="col-md-6">
-            
+            @Html.DropDownListFor(f => f.SelectedSection,new SelectList(Model.Sections,"SectionId","SectionName"),"Select Section", new { @class = "form-control", required = "required" })
             <div class="form-group">
                 @Html.LabelFor(m => m.FileDescription)
-                @Html.TextAreaFor(m => m.FileDescription, new { @class = "form-control", rows = "5",placeholder="Optional Description" })
+                @Html.TextAreaFor(m => m.FileDescription, new { @class = "form-control", rows = "5", placeholder = "Optional Description" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.FileRemarks)
@@ -53,5 +49,7 @@
         </div>
     </div>
 }
-    
 
+@section Scripts{
+    
+}

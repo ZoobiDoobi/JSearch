@@ -9,10 +9,19 @@
 <div class="row">
     <div class="col-md-12">
         <div id="remote">
-            <input class="form-control typeahead " type="text" placeholder="Search Judgements" />
+            <input class="form-control typeahead " type="text" placeholder="Search Judgements"/>
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row" id="details" style="display: none;">
+        <h2 id="title"></h2>
+        <p id="description"></p>
+        <a href="" class="btn btn-success" id="downloadLink">Download</a>
+    </div>
+</div>
+
 @section scripts{
     <script>
         $(document).ready(function () {
@@ -20,6 +29,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('FileTitle'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
+                    //url:'/api/Search?query=%QUERY',
                     url: 'http://202.142.179.246/JSearch/api/Search?query=%QUERY',
                     wildcard: '%QUERY'
                 }
@@ -27,12 +37,17 @@
 
             $('#remote .typeahead').typeahead({
                 minLength: 3,
-                highlight : true
+                highlight: true
             },
-                {
+            {
                 name: 'LawFiles',
                 display: 'FileTitle',
                 source: files
+            }).on("typeahead:select", function (e, remote) {
+                $("#details").css("display", "block");
+                $("#title").html(remote.FileTitle);
+                $("#description").html(remote.FileDescription);
+                $("#downloadLink").attr("href", remote.FilePath);
             });
         });
     </script>

@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("Create New", "CreateJudge","",new {@class = "btn btn-success btn-lg" })
 </p>
-<table class="table">
+<table class="table" id="judges">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.JudgeName)
@@ -24,25 +25,36 @@
             Actions
         </th>
     </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-@foreach (var item in Model) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.JudgeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JudgeRemarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JudgeStatus)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { judgeId=item.JudgeId }) |
-            @Html.ActionLink("Details", "Details", new { judgeId=item.JudgeId }) |
-            @Html.ActionLink("Delete", "Delete", new { judgeId=item.JudgeId })
-        </td>
-    </tr>
-}
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.JudgeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JudgeRemarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JudgeStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { judgeId = item.JudgeId }) |
+                    @Html.ActionLink("Details", "Details", new { judgeId = item.JudgeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { judgeId = item.JudgeId })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $("#judges").DataTable({
+                "bPaginate":false
+            });
+        });
+    </script>
+}

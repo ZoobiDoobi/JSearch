@@ -48,7 +48,8 @@ namespace JSearch.Controllers
 
                 db.Courts.Add(court);
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                TempData["Message"] = "Record Successfully Entered";
+                return RedirectToAction("Index");
             }
             else
             {

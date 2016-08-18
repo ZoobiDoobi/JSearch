@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace JSearch
 {
@@ -10,10 +9,10 @@ namespace JSearch
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/DataTables/jquery.dataTables.min.js",
                         "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/datatables/jquery.datatables.js",
-                      "~/Scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/respond.js", 
+                      //"~/Scripts/datatables/datatables.bootstrap.js",
                       "~/Scripts/typeahead.bundle.js"
                       ));
 
@@ -27,7 +26,7 @@ namespace JSearch
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css",
+                      //"~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/DataTables/css/jquery.dataTables.min.css",
                       "~/Content/typeahead.css",
                       "~/Content/site.css"));
